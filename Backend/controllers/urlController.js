@@ -26,10 +26,15 @@ exports.createUrl = async (req,res)=>{
             shortId,
             expiresAt
         })
-        const qrCode = await QrCode.toDataURL(`http://localhost:${process.env.PORT || 3000}/${shortId}`)
+        const baseUrl = process.env.NODE_ENV === 'production' 
+            ? 'https://url-shortener-nh6s.onrender.com'
+            : `http://localhost:${process.env.PORT || 3000}`
+        
+        const shortUrl = `${baseUrl}/${shortId}`
+        const qrCode = await QrCode.toDataURL(shortUrl)
         console.log(qrCode)
         res.json({
-            shortUrl:  `http://localhost:${process.env.PORT || 3000}/${shortId}`,
+            shortUrl,
             expiresAt,
             qrCode
         })

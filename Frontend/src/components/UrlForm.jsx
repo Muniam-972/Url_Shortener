@@ -38,7 +38,7 @@ const UrlForm = ({ onUrlShortened }) => {
         requestBody.expiresIn = parseInt(expiresIn)
       }
 
-      const response = await fetch('http://localhost:3000/url/create', {
+      const response = await fetch('https://url-shortener-nh6s.onrender.com/url/create', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
